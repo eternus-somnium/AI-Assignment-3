@@ -21,7 +21,8 @@ public class Interface : MonoBehaviour
 	// Use this for initialization
 	public void InterfaceStart () 
 	{
-		g = GameObject.Find("Game Manager").GetComponent<GameManager>();
+		if(g == null)
+			g = GameObject.Find("GameManager").GetComponent<GameManager>();
 		eventSystem = GameObject.Find("EventSystem");
 	}
 

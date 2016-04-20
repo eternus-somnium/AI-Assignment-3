@@ -19,6 +19,8 @@ public class ResultMenuControls : Interface
 
 		//Highlight default options
 		TabSwitch(GameObject.Find("EyelinePanel"));
+		//SwitchButtonColor(GameObject.Find("Eyeline"),true);
+
 	}
 
 	void Update()

@@ -7,7 +7,6 @@ public class ButtonListGenerator : Interface
 {
 	public GameObject prototypeButton;
 
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -23,18 +22,21 @@ public class ButtonListGenerator : Interface
 	void populateButtonList()
 	{
 		int i;
-		//GetComponent<RectTransform>().
-		for(i=0; i < g.units.Length * 2;i++)
+
+		for(i=0; i < g.units.Length*2;i++)
 		{
 			GameObject newButton = (GameObject)Instantiate(prototypeButton,gameObject.transform.position,Quaternion.identity);
 			newButton.transform.SetParent(gameObject.transform);
-			newButton.GetComponent<RectTransform>().position += new Vector3(0,-50-40*i,0);
+			newButton.GetComponent<RectTransform>().position += new Vector3(0,-60-40*i,0);
 
-			newButton.name = Random.Range(0,g.parts.Length-1).ToString(); 
-			newButton.transform.GetChild(0).GetComponent<Text>().text = g.parts[int.Parse(newButton.name)].name;
+			int partNumber = Random.Range(0,g.parts.Length);
+			newButton.name = partNumber.ToString();
+			newButton.transform.GetChild(0).GetComponent<Text>().text = g.parts[partNumber].name;
 
-			//newButton.GetComponent<Button>().interactable = true;
+			newButton.GetComponent<Button>().interactable = true;
 		}
+
+		gameObject.GetComponent<RectTransform>().offsetMin = new Vector2(0, -g.units.Length*60);
 		prototypeButton.SetActive(false);
 	}
 }

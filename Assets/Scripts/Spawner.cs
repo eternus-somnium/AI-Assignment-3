@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
 	public int units;
 	public GameObject tankPrefab;
 	public GameObject[] hangers;
-	LeftPanel leftPanel;
+	public LeftPanel leftPanel;
 
 	public void FindHangers()
 	{
@@ -25,11 +25,10 @@ public class Spawner : MonoBehaviour
 				Vector3.zero,
 				Quaternion.identity);
 
+			tanks[i].name = "Tank: " + i;
 			Tank tankScript = tanks[i].GetComponent<Tank>();
 			tankScript.color = GenerateColor(i);
 			tankScript.hangerPosition = hangers[i].transform.position;
-			tankScript.panel = leftPanel.AddUnitPanel();
-			tankScript.panel.GetComponentsInChildren<Image>()[1].color = tankScript.color;
 
 			if(i == 0)
 				tanks[i].AddComponent<User>();

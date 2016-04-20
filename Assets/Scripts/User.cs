@@ -32,7 +32,7 @@ public class User : MonoBehaviour
 
 	void TurretController()
 	{
-		float turretRotation = Input.GetAxis("Mouse X");
+		float turretRotation = Input.GetAxis("Mouse X")*10;
 		t.RotateTurret(turretRotation);
 	}
 

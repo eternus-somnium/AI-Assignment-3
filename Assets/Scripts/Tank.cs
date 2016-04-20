@@ -31,12 +31,17 @@ public class Tank : Entity
 		mainWeapon,
 		secondaryWeapon,
 		accessory;
-		
+	Spawner s;
 
 	// Use this for initialization
 	public void Awake () 
 	{
 		DontDestroyOnLoad(gameObject);
+	}
+
+	public void Start()
+	{
+		s=GameObject.Find("GameManager").GetComponent<Spawner>();
 	}
 	
 	// Update is called once per frame
@@ -73,6 +78,7 @@ public class Tank : Entity
 
 	public void startRound()
 	{
+		GetComponent<Rigidbody>().useGravity = true;
 		active = true;
 		weight = 0;
 		if(bodySchematic != null)
@@ -110,10 +116,14 @@ public class Tank : Entity
 		maxHealth = body.GetComponent<Part>().attribute;
 
 		speed = track.GetComponent<Part>().attribute / weight;
+
+		panel = GameObject.Find("LeftPanel").GetComponent<LeftPanel>().AddUnitPanel();
+		panel.GetComponentsInChildren<Image>()[1].color = color;
 	}
 
 	public void EndRound()
 	{
+		GetComponent<Rigidbody>().useGravity = false;
 		active = false;
 		Destroy(body);
 		Destroy(track);
@@ -136,6 +146,6 @@ public class Tank : Entity
 
 	public override void Death ()
 	{
-		GameObject.Find("Game Manager").GetComponent<Spawner>().SpawnTank(gameObject, false);
+		s.SpawnTank(gameObject, false);
 	}
 }

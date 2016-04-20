@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 471922}
   - 33: {fileID: 3347374}
-  - 136: {fileID: 13606336}
   - 23: {fileID: 2368634}
   - 114: {fileID: 11435098}
   m_Layer: 0
@@ -140,7 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 2
+  attribute: 0
   description: A more powerful cannon
+  cost: 2
   unit: {fileID: 0}
   projectile:
   - {fileID: 149348, guid: 41c9df25b6cf919498f35488d6af21d4, type: 2}
@@ -148,19 +149,6 @@ MonoBehaviour:
   - 15
   projectileDamage:
   - 20
---- !u!136 &13606336
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142810}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13641634
 CapsuleCollider:
   m_ObjectHideFlags: 1

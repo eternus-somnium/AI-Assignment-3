@@ -15,6 +15,5 @@ public class MainMenu : Interface
 	public void BeginButton()
 	{
 		IndividualButtonSwitch();
-		SceneManager.LoadScene("Arena");
 	}
 }

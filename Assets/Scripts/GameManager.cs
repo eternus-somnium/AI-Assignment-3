@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour 
 {
-	public int state = 0; //0=menu, 1=arena, 2=shop, 3= results
+	public int 
+		state = 0, //0=menu, 1=arena, 2=shop, 3= results
+		round = 0; 
 	public float roundTime, shopTime;
 
 	MapGenerator g;
@@ -38,18 +40,23 @@ public class GameManager : MonoBehaviour
 	{
 	}
 
-	void OnLevelWasLoaded(int level)
+	public void LoadLevel(int level)
 	{
 		switch(level)
 		{
 		case 0:
+			SceneManager.LoadScene("MainMenu");
 			break;
 		case 1:
+			SceneManager.LoadScene("Arena");
+			round++;
 			Invoke("SetupRound",.1f);
 			break;
 		case 2:
+			SceneManager.LoadScene("Shop");
 			break;
 		case 3:
+			SceneManager.LoadScene("Results");
 			break;
 		}
 	}
@@ -81,6 +88,6 @@ public class GameManager : MonoBehaviour
 	{
 		foreach(GameObject u in units)
 			u.GetComponent<Tank>().EndRound();
-		SceneManager.LoadScene("Shop");
+		LoadLevel(2);
 	}
 }

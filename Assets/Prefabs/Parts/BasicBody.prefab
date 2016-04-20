@@ -29,7 +29,6 @@ GameObject:
   - 4: {fileID: 463172}
   - 33: {fileID: 3359556}
   - 23: {fileID: 2325826}
-  - 65: {fileID: 6543084}
   - 114: {fileID: 11489560}
   m_Layer: 8
   m_Name: BasicBody
@@ -223,18 +222,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128128}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6543084
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128128}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11427814
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,7 +282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 5
   attribute: 10
-  description: 
+  description: A standard body
   cost: 0
 --- !u!136 &13692206
 CapsuleCollider:

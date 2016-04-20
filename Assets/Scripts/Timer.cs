@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		g = GameObject.Find("Game Manager").GetComponent<GameManager>();
+		g = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 	
 	// Update is called once per frame

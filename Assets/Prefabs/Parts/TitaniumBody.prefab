@@ -64,7 +64,6 @@ GameObject:
   - 4: {fileID: 473174}
   - 33: {fileID: 3314286}
   - 23: {fileID: 2347932}
-  - 65: {fileID: 6550762}
   - 114: {fileID: 11450448}
   m_Layer: 8
   m_Name: TitaniumBody
@@ -223,18 +222,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 199384}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &6550762
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 199384}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11411922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,7 +283,7 @@ MonoBehaviour:
   weight: 8
   attribute: 15
   description: A sturdier body
-  cost: 0
+  cost: 3
 --- !u!136 &13602956
 CapsuleCollider:
   m_ObjectHideFlags: 1
