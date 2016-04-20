@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Menus\ButtonListGenerator.cs" />
      <Compile Include="Assets\Scripts\Menus\Interface.cs" />
      <Compile Include="Assets\Scripts\Menus\LeftPanel.cs" />
+     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\ResultMenuControls.cs" />
      <Compile Include="Assets\Scripts\Menus\ShopMenuControls.cs" />
      <Compile Include="Assets\Scripts\Parts\BasicCannon.cs" />

@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 2
+  description: A more powerful cannon
   unit: {fileID: 0}
   projectile:
   - {fileID: 149348, guid: 41c9df25b6cf919498f35488d6af21d4, type: 2}

@@ -192,7 +192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  baseSpeed: 50
+  attribute: 50
+  description: A more efficient set of tracks
+  cost: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

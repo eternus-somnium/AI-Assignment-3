@@ -294,7 +294,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 5
-  health: 10
+  attribute: 10
+  description: 
+  cost: 0
 --- !u!136 &13692206
 CapsuleCollider:
   m_ObjectHideFlags: 1

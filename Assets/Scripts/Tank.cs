@@ -107,9 +107,9 @@ public class Tank : Entity
 		}
 
 		//Set stats
-		maxHealth = body.GetComponent<Body>().health;
+		maxHealth = body.GetComponent<Part>().attribute;
 
-		speed = track.GetComponent<Track>().baseSpeed / weight;
+		speed = track.GetComponent<Part>().attribute / weight;
 	}
 
 	public void EndRound()

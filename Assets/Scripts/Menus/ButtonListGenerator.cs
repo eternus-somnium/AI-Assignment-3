@@ -30,10 +30,11 @@ public class ButtonListGenerator : Interface
 			newButton.transform.SetParent(gameObject.transform);
 			newButton.GetComponent<RectTransform>().position += new Vector3(0,-50-40*i,0);
 
-			newButton.name = g.parts[Random.Range(0,g.parts.Length-1)].name;
-			newButton.transform.GetChild(0).GetComponent<Text>().text = newButton.name;
+			newButton.name = Random.Range(0,g.parts.Length-1).ToString(); 
+			newButton.transform.GetChild(0).GetComponent<Text>().text = g.parts[int.Parse(newButton.name)].name;
 
-			newButton.GetComponent<Button>().interactable = true;
+			//newButton.GetComponent<Button>().interactable = true;
 		}
+		prototypeButton.SetActive(false);
 	}
 }
