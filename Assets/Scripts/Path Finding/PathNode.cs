@@ -6,8 +6,18 @@ public class PathNode : MonoBehaviour {
     public GameObject up = null, down = null, left = null, right = null;
     public PathNode[] neighbors;
 
-    public PathNode cameFrom;
+    public enum TouchingObjects { Tanks, HasItem, Health, Buffs };
+
+    public PathNode cameFrom, dijkstraCameFrom;
     public float g, h, f;
+
+    public float distance;
+
+    public int dijkstraIndex;
+
+    int tanks;
+
+    bool hasTank, hasItem, hasHealth, hasBuff;
 
     private AStar astar;
 
@@ -44,22 +54,48 @@ public class PathNode : MonoBehaviour {
         }
     }
 
-    /*
-    void OnMouseDown()
+    public void OnTankOn()
     {
-        if (astar.SelectionMode() == "start")
-        {
-            astar.SelectStart(gameObject);
+        tanks++;
+        hasTank = true;
+    }
 
-            gameObject.GetComponent<Renderer>().material.color = Color.blue;
-        }
-        else if (astar.SelectionMode() == "target")
+    public void OnTankOff()
+    {
+        tanks--;
+
+        if (tanks <= 0)
         {
-            astar.SelectTarget(gameObject);
-                
-            gameObject.GetComponent<Renderer>().material.color = Color.green;
+            hasTank = false;
         }
-    }*/
+    }
+
+    public void OnHealthStateChanged(bool state)
+    {
+        hasHealth = state;
+    }
+
+    public void OnBuffStateChanged(bool state)
+    {
+        hasBuff = state;
+    }
+
+    public bool HasType(TouchingObjects type)
+    {
+        switch (type)
+        {
+            case (TouchingObjects.Tanks):
+                return hasTank;
+            case (TouchingObjects.HasItem):
+                return hasItem;
+            case (TouchingObjects.Health):
+                return hasHealth;
+            case (TouchingObjects.Buffs):
+                return hasBuff;
+            default:
+                return false;
+        }
+    }
 
     void OnMouseOver()
     {

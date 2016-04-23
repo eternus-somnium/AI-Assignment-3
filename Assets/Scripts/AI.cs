@@ -53,6 +53,15 @@ public class AI : MonoBehaviour {
             return;
         }
 
+        //Tank no longer on current node (used for pathfinding tanks/items)
+        if (curNode != null)
+        {
+            curNode.OnTankOff();
+        }
+
+        //Set a tank on the node, doing as soon as the target is set giving the AI a pseudo sense of knowing the direction of enemies
+        target.OnTankOn();
+
         moveTarget = target;
         facingTarget = false;
         curNode = null;
@@ -60,6 +69,9 @@ public class AI : MonoBehaviour {
 
     private void MakeDecisions()
     {
+        //Temporary variable, just putting this here to show that we can swap state from random roaming to chasing other tanks
+        bool aggresive = false;
+
         //If no current node and no move target, move to nearest node (handles getting tanks out of start gates)
         if (curNode == null)
         {
@@ -71,12 +83,25 @@ public class AI : MonoBehaviour {
             return;
         }
 
-        //TODO: Currently just finding a random node and moving towards it, implement real logic here!
+        //TODO: Create real goal state machine for tanks (ie. attack, pick up health, move to corner, etc)
         if (goal == null && moveTarget == null)
         {
-            goal = pathFinding.GetRandomMoveTarget();
-            //Debug.Log("Setting Goal: " + goal.gameObject.name + " For tank: " + tank.gameObject.name);
-            goalPath = pathFinding.GetPathToTarget(curNode, goal);
+            //TODO: Currently just finding a random node and moving towards it, implement real logic here
+            if (!aggresive)
+            {
+                goal = pathFinding.GetRandomGoal();
+                goalPath = pathFinding.GetPathToTarget(curNode, goal);
+            }
+            //TODO: Currently just chasing closest tank, implement real logic here
+            else
+            {
+                goal = pathFinding.GetNearest(curNode, PathNode.TouchingObjects.Tanks);
+
+                if (goal != null)
+                {
+                    goalPath = pathFinding.GetPathToTarget(curNode, goal);
+                }
+            }
         }
     }
 

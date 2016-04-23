@@ -4,14 +4,16 @@ using System.Collections;
 public class PathFinding : MonoBehaviour {
 
     AStar aStar;
+    Dijkstras dijkstras;
 
     private PathNode[] nodes;
 
 	// Use this for initialization
 	void Start () {
         aStar = gameObject.GetComponent<AStar>();
+        dijkstras = gameObject.GetComponent<Dijkstras>();
 
-        if (aStar == null)
+        if (aStar == null || dijkstras == null)
         {
             Debug.Log("PathFinding needs to be on the same GameObject as AStar and Dijkstras");
         }
@@ -35,7 +37,7 @@ public class PathFinding : MonoBehaviour {
         return start;
     }
 
-    public PathNode GetRandomMoveTarget()
+    public PathNode GetRandomGoal()
     {
         return nodes[Random.Range(0, nodes.Length)];
     }
@@ -44,5 +46,27 @@ public class PathFinding : MonoBehaviour {
     public Stack GetPathToTarget(PathNode currentNode, PathNode targetNode)
     {
         return aStar.AStarSearch(currentNode, targetNode);
+    }
+
+    //Searches all nodes on the map for one with a specific type (tank on it, item, etc) and returns the nearest one to the source
+    public PathNode GetNearest(PathNode source, PathNode.TouchingObjects objType)
+    {
+        PathNode nearest = null;
+
+        dijkstras.search(source);
+
+        float minDist = Mathf.Infinity;
+
+        foreach (PathNode node in nodes)
+        {
+            if (node != source && node.HasType(objType) && node.distance < minDist)
+            {
+                nearest = node;
+                minDist = node.distance;
+            }
+        }
+
+        //Potentially null
+        return nearest;
     }
 }

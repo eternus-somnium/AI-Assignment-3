@@ -619,6 +619,7 @@ GameObject:
   - 4: {fileID: 1866840387}
   - 114: {fileID: 1866840386}
   - 114: {fileID: 1866840388}
+  - 114: {fileID: 1866840389}
   m_Layer: 0
   m_Name: ArenaAI
   m_TagString: Untagged
@@ -638,8 +639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectMode: 1
-  moveMode: 0
-  autoMoveMode: 0
   start: {fileID: 0}
   target: {fileID: 0}
 --- !u!4 &1866840387
@@ -663,6 +662,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7ca1a7f3499b2244add59995d96124a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1866840389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1866840385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b019a53bc0b79924885ce50b5b4eea83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2065438009
