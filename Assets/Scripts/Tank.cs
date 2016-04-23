@@ -25,12 +25,13 @@ public class Tank : Entity
 		mainWeaponSchematic,
 		secondaryWeaponSchematic,
 		accessorySchematic;
-	GameObject
-		body,
-		track,
-		mainWeapon,
-		secondaryWeapon,
-		accessory;
+    GameObject
+        body,
+        track,
+        mainWeapon,
+        secondaryWeapon,
+        accessory,
+        moveTarget;
 	Spawner s;
 
 	// Use this for initialization
@@ -51,6 +52,24 @@ public class Tank : Entity
 		EntityUpdate();
 		heading = Mathf.RoundToInt(gameObject.transform.rotation.eulerAngles.y);
 		position = gameObject.transform.position;
+
+        /*
+        if (moveTarget && gameObject.transform.position != moveTarget.transform.position)
+        {
+            Debug.Log("Moving");
+            float dotProduct = Vector3.Dot(transform.forward, (moveTarget.transform.position - transform.position).normalized);
+
+            if (dotProduct != 1f)
+            {
+                transform.rotation = Quaternion.LookRotation(Vector3.RotateTowards(transform.forward, moveTarget.transform.position - transform.position, speed * Time.deltaTime, 0.0f));
+            }
+            else
+            {
+                Debug.Log("Facing target");
+            }
+
+            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+        }*/
 	}
 
 	public void FireMain()
@@ -148,4 +167,11 @@ public class Tank : Entity
 	{
 		s.SpawnTank(gameObject, false);
 	}
+
+    //Called by the AI algorithms to set a target location for the tank to begin moving towards
+    //(Not for player tank)
+    public void MoveTo(GameObject _moveTarget)
+    {
+        moveTarget = _moveTarget;
+    }
 }
