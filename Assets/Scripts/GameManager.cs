@@ -81,6 +81,9 @@ public class GameManager : MonoBehaviour
 		{
 			s.SpawnTank(u, true);
 		}
+
+		GameObject.Find("Main Camera").GetComponent<CameraController>().playerTank = units[0];
+
 		t.StartTimer(roundTime*60);
 	}
 

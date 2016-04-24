@@ -2,19 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class User : MonoBehaviour 
+public class User : Driver 
 {
-	Tank t;
-    PathFinding pathFinding;
+	float setMoveTargetTimer=0;
 
 	void Start () 
 	{
-		t = GetComponent<Tank>();
-		GameObject.Find("Main Camera").GetComponent<CameraController>().playerTank = gameObject;
-
-        pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
-
-        InvokeRepeating("SetMoveTarget", 0, 2.0f);
+		DriverStart();
 	}
 	
 	// Update is called once per frame
@@ -25,6 +19,7 @@ public class User : MonoBehaviour
 			MoveController();
 			TurretController();
 			WeaponController();
+			SetMoveTarget();
 		}
 
         //Set all enemy tank's combat target to player (for testing)
@@ -68,13 +63,19 @@ public class User : MonoBehaviour
     //Sets move target as nearest node every second so that AI can track player
     void SetMoveTarget()
     {
-        if (t.moveTarget != null)
-        {
-            t.moveTarget.OnTankOff(t);
-        }
+		if(setMoveTargetTimer > 2)
+		{
+	        if (t.moveTarget != null)
+	        {
+	            t.moveTarget.OnTankOff(t);
+	        }
 
-        t.moveTarget = pathFinding.GetNearestNode(gameObject);
+	        t.moveTarget = p.GetNearestNode(gameObject);
 
-        t.moveTarget.OnTankOn(t);
+	        t.moveTarget.OnTankOn(t);
+			setMoveTargetTimer = 0;
+		}
+		else
+			setMoveTargetTimer += Time.deltaTime;
     }
 }

@@ -29,6 +29,7 @@ public class Spawner : MonoBehaviour
 			Tank tankScript = tanks[i].GetComponent<Tank>();
 			tankScript.color = GenerateColor(i);
 			tankScript.hangerPosition = hangers[i].transform.position;
+			tankScript.hangerRotation = hangers[i].transform.rotation;
 
 			if(i == 0)
 				tanks[i].AddComponent<User>();
@@ -44,6 +45,7 @@ public class Spawner : MonoBehaviour
 		unit.transform.position = tankScript.hangerPosition;
 		if(rebuild)
 			tankScript.startRound();
+		unit.transform.rotation = tankScript.hangerRotation;
 		tankScript.setBountyBoardValue();
 
 	}

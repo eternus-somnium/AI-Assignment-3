@@ -48,6 +48,7 @@
      <Compile Include="Assets\Scripts\AI.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Data.cs" />
+     <Compile Include="Assets\Scripts\Driver.cs" />
      <Compile Include="Assets\Scripts\Entity.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
@@ -62,6 +63,11 @@
      <Compile Include="Assets\Scripts\Parts\Part.cs" />
      <Compile Include="Assets\Scripts\Parts\Track.cs" />
      <Compile Include="Assets\Scripts\Parts\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Path Finding\AStar.cs" />
+     <Compile Include="Assets\Scripts\Path Finding\Dijkstras.cs" />
+     <Compile Include="Assets\Scripts\Path Finding\Node.cs" />
+     <Compile Include="Assets\Scripts\Path Finding\PathFinding.cs" />
+     <Compile Include="Assets\Scripts\Path Finding\PathNode.cs" />
      <Compile Include="Assets\Scripts\Seekbot.cs" />
      <Compile Include="Assets\Scripts\Sensors\AdjacencySensor.cs" />
      <Compile Include="Assets\Scripts\Sensors\PieSliceSensor.cs" />

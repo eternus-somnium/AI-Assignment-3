@@ -8,6 +8,8 @@ public class Tank : Entity
 	public Vector3 
 		position,
 		hangerPosition;
+	public Quaternion
+		hangerRotation;
 	public GameObject panel;
 	public Color color;
 	public float 
@@ -88,6 +90,8 @@ public class Tank : Entity
 		GetComponent<Rigidbody>().useGravity = true;
 		active = true;
 		weight = 0;
+
+		//Build tank
 		if(bodySchematic != null)
 		{
 			body = (GameObject) Instantiate(bodySchematic, transform.position + bodySchematic.transform.position, Quaternion.identity);
@@ -126,6 +130,9 @@ public class Tank : Entity
 
 		panel = GameObject.Find("LeftPanel").GetComponent<LeftPanel>().AddUnitPanel();
 		panel.GetComponentsInChildren<Image>()[1].color = color;
+
+		//Refresh drivers
+		GetComponent<Driver>().p = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
 	}
 
 	public void EndRound()

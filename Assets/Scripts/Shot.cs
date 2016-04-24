@@ -22,6 +22,7 @@ public class Shot : MonoBehaviour
 
 	void OnCollisionEnter(Collision c)
 	{
+		Debug.Log(c.collider.name);
 		if(c.transform.root != unit.transform)
 		{						
 			Tank victim = c.collider.GetComponent<Tank>();

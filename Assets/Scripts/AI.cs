@@ -2,9 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AI : MonoBehaviour {
-
-    PathFinding pathFinding;
+public class AI : Driver {
 
     public Stack goalPath;
 
@@ -26,9 +24,9 @@ public class AI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
+        p = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
 
-        if (pathFinding == null)
+        if (p == null)
         {
             Debug.Log("Either ArenaAI does not exist in current context or it does not have script 'PathFinding' attached");
         }
@@ -39,11 +37,15 @@ public class AI : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        MakeDecisions();
-        SetTargetsAlongGoalPath();
-        HandleMovement();
-        HandleCombat();
+	void Update () 
+	{
+		if(tank.active)
+		{
+	        MakeDecisions();
+	        SetTargetsAlongGoalPath();
+	        HandleMovement();
+	        HandleCombat();
+		}
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -86,7 +88,7 @@ public class AI : MonoBehaviour {
         {
             if (moveTarget == null)
             {
-                SetMoveTarget(pathFinding.GetNearestNode(gameObject));
+                SetMoveTarget(p.GetNearestNode(gameObject));
             }
 
             return;
@@ -103,7 +105,7 @@ public class AI : MonoBehaviour {
                 if (combatTarget.moveTarget != null && combatTarget.moveTarget != goal)
                 {
                     goal = combatTarget.moveTarget;
-                    goalPath = pathFinding.GetPathToTarget(curNode, goal);
+                    goalPath = p.GetPathToTarget(curNode, goal);
                 }
             }
             
@@ -119,13 +121,13 @@ public class AI : MonoBehaviour {
             //TODO: Currently just finding a random node and moving towards it, implement real logic here
             if (!aggresive)
             {
-                goal = pathFinding.GetRandomGoal();
-                goalPath = pathFinding.GetPathToTarget(curNode, goal);
+                goal = p.GetRandomGoal();
+                goalPath = p.GetPathToTarget(curNode, goal);
             }
             //TODO: Currently just chasing closest tank, implement real logic here
             else
             {
-                goal = pathFinding.GetNearest(curNode, PathNode.TouchingObjects.Tanks);
+                goal = p.GetNearest(curNode, PathNode.TouchingObjects.Tanks);
 
                 if (goal != null)
                 {
@@ -138,7 +140,7 @@ public class AI : MonoBehaviour {
                         //We may need some sort of "re-calculate path everytime it changes" type of logic
                     }
 
-                    goalPath = pathFinding.GetPathToTarget(curNode, goal);
+                    goalPath = p.GetPathToTarget(curNode, goal);
                 }
             }
         }

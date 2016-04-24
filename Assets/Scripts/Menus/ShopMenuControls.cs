@@ -81,19 +81,19 @@ public class ShopMenuControls : Interface
 		switch (selectedPart.tag)
 		{
 		case "Body":
-			currentPart = g.units[currentUnit].GetComponent<Tank>().bodySchematic;
+			currentPart = sortedUnits[currentUnit].GetComponent<Tank>().bodySchematic;
 			break;
 		case "Track":
-			currentPart = g.units[currentUnit].GetComponent<Tank>().trackSchematic;
+			currentPart = sortedUnits[currentUnit].GetComponent<Tank>().trackSchematic;
 			break;
 		case "MainWeapon":
-			currentPart = g.units[currentUnit].GetComponent<Tank>().mainWeaponSchematic;
+			currentPart = sortedUnits[currentUnit].GetComponent<Tank>().mainWeaponSchematic;
 			break;
 		case "SecondaryWeapon":
-			currentPart = g.units[currentUnit].GetComponent<Tank>().secondaryWeaponSchematic;
+			currentPart = sortedUnits[currentUnit].GetComponent<Tank>().secondaryWeaponSchematic;
 			break;
 		case "Accessory":
-			currentPart = g.units[currentUnit].GetComponent<Tank>().accessorySchematic;
+			currentPart = sortedUnits[currentUnit].GetComponent<Tank>().accessorySchematic;
 			break;
 		}
 
@@ -113,31 +113,33 @@ public class ShopMenuControls : Interface
 			switch (selectedPart.tag)
 			{
 			case "Body":
-				g.units[currentUnit].GetComponent<Tank>().bodySchematic = selectedPart;
+				sortedUnits[currentUnit].GetComponent<Tank>().bodySchematic = selectedPart;
 				break;
 			case "Track":
-				g.units[currentUnit].GetComponent<Tank>().trackSchematic = selectedPart;
+				sortedUnits[currentUnit].GetComponent<Tank>().trackSchematic = selectedPart;
 				break;
 			case "MainWeapon":
-				g.units[currentUnit].GetComponent<Tank>().mainWeaponSchematic = selectedPart;
+				sortedUnits[currentUnit].GetComponent<Tank>().mainWeaponSchematic = selectedPart;
 				break;
 			case "SecondaryWeapon":
-				g.units[currentUnit].GetComponent<Tank>().secondaryWeaponSchematic = selectedPart;
+				sortedUnits[currentUnit].GetComponent<Tank>().secondaryWeaponSchematic = selectedPart;
 				break;
 			case "Accessory":
-				g.units[currentUnit].GetComponent<Tank>().accessorySchematic = selectedPart;
+				sortedUnits[currentUnit].GetComponent<Tank>().accessorySchematic = selectedPart;
 				break;
 			}
 
 			//Update comparison panel
+			currentPart = selectedPart;
 			PopulateDisplayData(false);
 
 			//Charge the current unit
 			sortedUnits[currentUnit].GetComponent<Tank>().funds -= selectedPart.GetComponent<Part>().cost;
 			PopulateCurrentUnitData();
 
-			//Deactivate the selected part button
+			//Deactivate the selected part button and purchase button
 			selectedPartButton.GetComponent<Button>().interactable = false;
+			purchaseButton.GetComponent<Button>().interactable = false;
 		}
 	}
 
