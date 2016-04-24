@@ -3,10 +3,13 @@ using System.Collections;
 
 public class BasicCannon : Weapon 
 {
+    GameObject bullets;
 
 	// Use this for initialization
 	void Start () 
 	{
+        bullets = GameObject.Find("Bullets");
+
 		WeaponStart();
 	}
 	
@@ -19,6 +22,7 @@ public class BasicCannon : Weapon
 	{
 		Vector3 spawnPosition = transform.position;
 		GameObject shot = (GameObject) Instantiate(projectile[0], spawnPosition, transform.rotation);
+        shot.transform.SetParent(bullets.transform);
 		shot.GetComponent<Shot>().unit = unit;
 	}
 }

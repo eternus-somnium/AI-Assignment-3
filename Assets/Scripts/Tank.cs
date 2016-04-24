@@ -35,6 +35,11 @@ public class Tank : Entity
 
     public PathNode moveTarget = null;
 
+    private AI ai = null;
+
+    //Indicator for whether or not tank is currently safe in hanger
+    public bool safe;
+
 	// Use this for initialization
 	public void Awake () 
 	{
@@ -44,6 +49,10 @@ public class Tank : Entity
 	public void Start()
 	{
 		s=GameObject.Find("GameManager").GetComponent<Spawner>();
+
+        ai = gameObject.GetComponent<AI>();
+
+        safe = true;
 	}
 	
 	// Update is called once per frame
@@ -153,6 +162,11 @@ public class Tank : Entity
 
 	public override void Death ()
 	{
+        if (ai != null)
+        {
+            ai.OnDeath();
+        }
+
 		s.SpawnTank(gameObject, false);
 	}
 }

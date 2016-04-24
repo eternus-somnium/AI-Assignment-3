@@ -9,6 +9,9 @@ public class Spawner : MonoBehaviour
 	public GameObject[] hangers;
 	public LeftPanel leftPanel;
 
+    public GameObject HPUpPrefab;
+    public GameObject AmmoUpPrefab;
+
 	public void FindHangers()
 	{
 		hangers = GameObject.FindGameObjectsWithTag("Hanger");
@@ -41,6 +44,7 @@ public class Spawner : MonoBehaviour
 	{
 		Tank tankScript = unit.GetComponent<Tank>();
 		tankScript.health = tankScript.maxHealth;
+        tankScript.safe = true;
 		unit.transform.position = tankScript.hangerPosition;
 		if(rebuild)
 			tankScript.startRound();
@@ -66,4 +70,19 @@ public class Spawner : MonoBehaviour
 
 		return new Color(r/255,g/255,b/255);
 	}
+
+    public void SpawnItems()
+    {
+        HPUpPrefab = (GameObject)Resources.Load("Prefabs/HPUp");
+
+        int numHPToSpawn = 5;
+        int numAmmoToSpawn = 5;
+
+        for (int i = 0; i < numHPToSpawn; ++i)
+        {
+            GameObject hpInstance = Instantiate(HPUpPrefab);
+
+            hpInstance.transform.position = new Vector3(Random.Range(0, 10) * 10, 2f, Random.Range(0, 10) * 10);
+        }
+    }
 }

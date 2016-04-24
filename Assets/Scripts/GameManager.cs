@@ -81,6 +81,9 @@ public class GameManager : MonoBehaviour
 		{
 			s.SpawnTank(u, true);
 		}
+
+        s.SpawnItems();
+
 		t.StartTimer(roundTime*60);
 	}
 
