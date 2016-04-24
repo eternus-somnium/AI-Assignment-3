@@ -141,7 +141,7 @@ public class Tank : Entity
 		panel.GetComponentsInChildren<Image>()[1].color = color;
 
 		//Refresh drivers
-		GetComponent<Driver>().p = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
+		GetComponent<Driver>().pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
 	}
 
 	public void EndRound()

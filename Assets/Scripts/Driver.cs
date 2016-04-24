@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Driver : MonoBehaviour 
 {
-	public PathFinding p;
+	public PathFinding pathFinding;
 	public Tank t;
 	void Start()
 	{

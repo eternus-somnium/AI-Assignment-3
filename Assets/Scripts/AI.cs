@@ -26,9 +26,9 @@ public class AI : Driver {
 
 	// Use this for initialization
 	void Start () {
-        p = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
+        pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
 
-        if (p == null)
+        if (pathFinding == null)
         {
             Debug.Log("Either ArenaAI does not exist in current context or it does not have script 'PathFinding' attached");
         }
@@ -90,7 +90,7 @@ public class AI : Driver {
         {
             if (moveTarget == null)
             {
-                SetMoveTarget(p.GetNearestNode(gameObject));
+                SetMoveTarget(pathFinding.GetNearestNode(gameObject));
             }
 
             return;
@@ -130,8 +130,8 @@ public class AI : Driver {
             //TODO: Currently just finding a random node and moving towards it, implement real logic here
             if (!aggresive)
             {
-                goal = p.GetRandomGoal();
-                goalPath = p.GetPathToTarget(curNode, goal);
+                goal = pathFinding.GetRandomGoal();
+                goalPath = pathFinding.GetPathToTarget(curNode, goal);
             }
             //TODO: Currently just chasing closest tank, implement real logic here
             else

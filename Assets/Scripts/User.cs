@@ -70,7 +70,7 @@ public class User : Driver
 	            t.moveTarget.OnTankOff(t);
 	        }
 
-	        t.moveTarget = p.GetNearestNode(gameObject);
+	        t.moveTarget = pathFinding.GetNearestNode(gameObject);
 
 	        t.moveTarget.OnTankOn(t);
 			setMoveTargetTimer = 0;
