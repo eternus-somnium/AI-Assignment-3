@@ -78,6 +78,11 @@ public class Tank : Entity
 		mainWeapon.transform.Rotate(new Vector3(0, turretTurn * 25 * Time.deltaTime, 0));
 	}
 
+    public void RotateTurretTowards(GameObject obj)
+    {
+        mainWeapon.transform.LookAt(obj.transform.position);
+    }
+
 	public void startRound()
 	{
 		GetComponent<Rigidbody>().useGravity = true;

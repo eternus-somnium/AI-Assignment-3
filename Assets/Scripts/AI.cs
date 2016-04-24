@@ -21,6 +21,9 @@ public class AI : MonoBehaviour {
 
     bool facingTarget = false;
 
+    float fireRate = 0.5f;
+    float fireTimer;
+
 	// Use this for initialization
 	void Start () {
         pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
@@ -31,6 +34,8 @@ public class AI : MonoBehaviour {
         }
 
         tank = gameObject.GetComponent<Tank>();
+
+        fireTimer = fireRate;
 	}
 	
 	// Update is called once per frame
@@ -38,6 +43,7 @@ public class AI : MonoBehaviour {
         MakeDecisions();
         SetTargetsAlongGoalPath();
         HandleMovement();
+        HandleCombat();
 
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -102,6 +108,9 @@ public class AI : MonoBehaviour {
             }
             
             //Set combat target to null at some point when it is best to (Possibly when low HP, target is dead, etc)
+
+            //Returning here may or may not be the right choice, for now Im thinking we'll make combatTarget null when necessary and dont do other logic until then
+            return;
         }
 
         //Handles determining the next goal of the tank (To move somewhere, to find a combat target, etc)
@@ -180,6 +189,22 @@ public class AI : MonoBehaviour {
                 {
                     transform.position = Vector3.MoveTowards(ZeroOutY(transform.position), ZeroOutY(moveTarget.transform.position), moveStep);
                 }
+            }
+        }
+    }
+
+    private void HandleCombat()
+    {
+        if (combatTarget != null)
+        {
+            tank.RotateTurretTowards(combatTarget.gameObject);
+
+            fireTimer -= Time.deltaTime;
+
+            if (fireTimer <= 0)
+            {
+                tank.FireMain();
+                fireTimer = fireRate;
             }
         }
     }
