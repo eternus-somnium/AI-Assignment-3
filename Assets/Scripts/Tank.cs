@@ -25,13 +25,15 @@ public class Tank : Entity
 		mainWeaponSchematic,
 		secondaryWeaponSchematic,
 		accessorySchematic;
-	GameObject
-		body,
-		track,
-		mainWeapon,
-		secondaryWeapon,
-		accessory;
+    GameObject
+        body,
+        track,
+        mainWeapon,
+        secondaryWeapon,
+        accessory;
 	Spawner s;
+
+    public PathNode moveTarget = null;
 
 	// Use this for initialization
 	public void Awake () 
@@ -75,6 +77,11 @@ public class Tank : Entity
 	{
 		mainWeapon.transform.Rotate(new Vector3(0, turretTurn * 25 * Time.deltaTime, 0));
 	}
+
+    public void RotateTurretTowards(GameObject obj)
+    {
+        mainWeapon.transform.LookAt(obj.transform.position);
+    }
 
 	public void startRound()
 	{
