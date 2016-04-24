@@ -63,6 +63,7 @@ public class AI : MonoBehaviour {
         target.OnTankOn(tank);
 
         moveTarget = target;
+        tank.moveTarget = target;
         facingTarget = false;
         curNode = null;
     }
@@ -70,7 +71,9 @@ public class AI : MonoBehaviour {
     private void MakeDecisions()
     {
         //Temporary variable, just putting this here to show that we can swap state from random roaming to chasing other tanks
-        bool aggresive = true;
+        bool aggresive = false;
+        //Temporary variable to show the ability for tanks to lock on to a single target and chase it
+        bool lockOnInitialTarget = false;
 
         //If no current node and no move target, move to nearest node (handles getting tanks out of start gates)
         if (curNode == null)
@@ -83,9 +86,25 @@ public class AI : MonoBehaviour {
             return;
         }
 
-
-
         //TODO: Create real goal state machine for tanks (ie. attack, pick up health, move to corner, etc)
+
+        //If there is a combat target already, decide how to handle it
+        if (combatTarget != null)
+        {
+            //lockOnInitialTarget is an example of having a tank always chase its target, it has no other logic than to follow combatTarget
+            if (lockOnInitialTarget)
+            {
+                if (combatTarget.moveTarget != null && combatTarget.moveTarget != goal)
+                {
+                    goal = combatTarget.moveTarget;
+                    goalPath = pathFinding.GetPathToTarget(curNode, goal);
+                }
+            }
+            
+            //Set combat target to null at some point when it is best to (Possibly when low HP, target is dead, etc)
+        }
+
+        //Handles determining the next goal of the tank (To move somewhere, to find a combat target, etc)
         if (goal == null && moveTarget == null)
         {
             //TODO: Currently just finding a random node and moving towards it, implement real logic here
@@ -106,7 +125,7 @@ public class AI : MonoBehaviour {
                         //Selecting combat target as first tank listed on node, may want to move to lowest health or highest points in future
                         combatTarget = goal.tanksOnNode[0];
 
-                        //Once combat target is selected, it could be chased by setting goal to combatTarget.GetComponent<AI>().moveTarget continuously
+                        //Once combat target is selected, it could be chased by setting goal to combatTarget.moveTarget continuously
                         //We may need some sort of "re-calculate path everytime it changes" type of logic
                     }
 
@@ -154,6 +173,7 @@ public class AI : MonoBehaviour {
                     //Debug.Log("Tank: " + tank.gameObject.name + " hit target");
                     curNode = moveTarget;
                     moveTarget = null;
+                    tank.moveTarget = null;
                 }
                 //Target not reached, move towards target
                 else

@@ -5,11 +5,16 @@ using System.Collections.Generic;
 public class User : MonoBehaviour 
 {
 	Tank t;
-	// Use this for initialization
+    PathFinding pathFinding;
+
 	void Start () 
 	{
 		t = GetComponent<Tank>();
 		GameObject.Find("Main Camera").GetComponent<CameraController>().playerTank = gameObject;
+
+        pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
+
+        InvokeRepeating("SetMoveTarget", 0, 2.0f);
 	}
 	
 	// Update is called once per frame
@@ -44,5 +49,16 @@ public class User : MonoBehaviour
 			t.FireSecondary();
 	}
 
+    //Sets move target as nearest node every second so that AI can track player
+    void SetMoveTarget()
+    {
+        if (t.moveTarget != null)
+        {
+            t.moveTarget.OnTankOff(t);
+        }
 
+        t.moveTarget = pathFinding.GetNearestNode(gameObject);
+
+        t.moveTarget.OnTankOn(t);
+    }
 }
