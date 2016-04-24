@@ -26,6 +26,22 @@ public class User : MonoBehaviour
 			TurretController();
 			WeaponController();
 		}
+
+        //Set all enemy tank's combat target to player (for testing)
+        if (Input.GetKeyDown(KeyCode.PageDown))
+        {
+            GameObject[] tanks = GameObject.FindGameObjectsWithTag("Tank");
+
+            foreach (GameObject tank in tanks)
+            {
+                AI ai = tank.GetComponent<AI>();
+
+                if (ai != null)
+                {
+                    ai.combatTarget = t;
+                }
+            }
+        }
 	}
 
 	void MoveController()
