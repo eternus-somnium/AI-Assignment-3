@@ -12,7 +12,7 @@ GameObject:
   - 136: {fileID: 13602956}
   - 23: {fileID: 2320144}
   - 114: {fileID: 11434202}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Pie Slice Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ GameObject:
   - 136: {fileID: 13658948}
   - 23: {fileID: 2378258}
   - 114: {fileID: 11411922}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: AdjacencySensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 431766}
   - 114: {fileID: 11431352}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: WallSensors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - 33: {fileID: 3314286}
   - 23: {fileID: 2347932}
   - 114: {fileID: 11450448}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TitaniumBody
   m_TagString: Body
   m_Icon: {fileID: 0}

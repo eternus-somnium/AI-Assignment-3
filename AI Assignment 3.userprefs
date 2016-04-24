@@ -1,18 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\User.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Shot.cs">
     <Files>
-      <File FileName="Assets\Scripts\Menus\MainMenu.cs" Line="17" Column="28" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="48" Column="36" />
-      <File FileName="Assets\Scripts\Menus\ButtonListGenerator.cs" Line="32" Column="50" />
+      <File FileName="Assets\Scripts\Menus\ShopMenuControls.cs" Line="146" Column="62" />
+      <File FileName="Assets\Scripts\Menus\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menus\ButtonListGenerator.cs" Line="13" Column="24" />
       <File FileName="Assets\Scripts\Parts\Track.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\User.cs" Line="35" Column="53" />
-      <File FileName="Assets\Scripts\Spawner.cs" Line="10" Column="9" />
-      <File FileName="Assets\Scripts\Timer.cs" Line="12" Column="28" />
-      <File FileName="Assets\Scripts\Menus\Interface.cs" Line="25" Column="4" />
-      <File FileName="Assets\Scripts\Tank.cs" Line="120" Column="54" />
-      <File FileName="Assets\Scripts\Entity.cs" Line="4" Column="1" />
-      <File FileName="Assets\Scripts\Menus\ShopMenuControls.cs" Line="176" Column="33" />
+      <File FileName="Assets\Scripts\User.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Spawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Timer.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menus\Interface.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Tank.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Entity.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\MapGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Shot.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -22,6 +24,7 @@
       <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Menus\ShopMenuControls.cs" line="103" column="1" />
       <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Menus\ShopMenuControls.cs" line="108" column="1" />
       <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Menus\ShopMenuControls.cs" line="131" column="1" />
+      <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Menus\ShopMenuControls.cs" line="146" column="62" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\Timer.cs" />
      <Compile Include="Assets\Scripts\User.cs" />
      <Compile Include="Assets\Scripts\WallSensors.cs" />
+     <None Include="Assets\stg_basic_pics\document_and_picturelist\readme.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

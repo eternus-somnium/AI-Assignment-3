@@ -13,7 +13,8 @@ public class ShopMenuControls : Interface
 		selectedPartButton,
 		selectedPart,
 		currentPart,
-		purchaseButton;
+		purchaseButton,
+		passButton;
 
 	Text 
 		descriptionText,
@@ -36,6 +37,8 @@ public class ShopMenuControls : Interface
         InterfaceStart();
 
 		purchaseButton = GameObject.Find("PurchaseButton");
+		passButton = GameObject.Find("PassButton");
+
 		LocateTextObjects();
 
 		//Sort units by bounty
@@ -65,7 +68,7 @@ public class ShopMenuControls : Interface
 		selectedPartName = GameObject.Find ("ShopName").GetComponent<Text>();
 		selectedPartWeight = GameObject.Find ("ShopWeight").GetComponent<Text>();
 		selectedPartAttribute = GameObject.Find ("ShopAttribute").GetComponent<Text>();
-		selectedPartCost = GameObject.Find("PurchaseButton").GetComponentInChildren<Text>();
+		selectedPartCost = purchaseButton.GetComponentInChildren<Text>();
 		unitName = GameObject.Find("UnitName").GetComponent<Text>();
 		funds = GameObject.Find("Funds").GetComponent<Text>();
 	}
@@ -95,14 +98,16 @@ public class ShopMenuControls : Interface
 		}
 
 		PopulateDisplayData(false);
+		purchaseButton.GetComponent<Button>().interactable = 
+			(selectedPart.GetComponent<Part>().cost <= sortedUnits[currentUnit].GetComponent<Tank>().funds &&
+				selectedPartName.text != currentPartName.text);
+			
 	}
 
 	public void BuyPart()
 	{
 		//If there is a part selected AND the current unit can afford the part And the current unit doesnt already have the selected part
-		if(selectedPart != null &&
-			selectedPart.GetComponent<Part>().cost <= sortedUnits[currentUnit].GetComponent<Tank>().funds  &&
-			selectedPartName.text != currentPartName.text)
+		if(selectedPart != null)
 		{
 			//Equip the part
 			switch (selectedPart.tag)
@@ -138,6 +143,7 @@ public class ShopMenuControls : Interface
 
 	public void Pass()
 	{
+		purchaseButton.GetComponent<Button>().interactable = false;
 		currentUnit++;
 		if(currentUnit == sortedUnits.Count)
 		{

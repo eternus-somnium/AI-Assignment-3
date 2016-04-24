@@ -20,17 +20,17 @@ public class Shot : MonoBehaviour
 		transform.Translate(Vector3.forward * baseSpeed * Time.deltaTime);
 	}
 
-	void OnTriggerEnter(Collider c)
+	void OnCollisionEnter(Collision c)
 	{
 		if(c.transform.root != unit.transform)
 		{						
-			Tank victim = c.GetComponent<Tank>();
+			Tank victim = c.collider.GetComponent<Tank>();
 
 			if(victim != null)
 			{
 				if(victim.health-Mathf.RoundToInt(baseDamage) <= 0)
 					unit.GetComponent<Tank>().addKill(victim.bounty);
-				c.GetComponent<Entity>().health-=Mathf.RoundToInt(baseDamage);
+				c.collider.GetComponent<Entity>().health-=Mathf.RoundToInt(baseDamage);
 			}
 
 			Destroy(gameObject);
