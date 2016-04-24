@@ -19,6 +19,8 @@ public class AI : Driver {
 
     bool facingTarget = false;
 
+    public int distanceToAttack = 2;
+
     float fireRate = 0.5f;
     float fireTimer;
 
@@ -79,9 +81,9 @@ public class AI : Driver {
     private void MakeDecisions()
     {
         //Temporary variable, just putting this here to show that we can swap state from random roaming to chasing other tanks
-        bool aggresive = false;
+        bool aggresive = true;
         //Temporary variable to show the ability for tanks to lock on to a single target and chase it
-        bool lockOnInitialTarget = false;
+        bool lockOnInitialTarget = true;
 
         //If no current node and no move target, move to nearest node (handles getting tanks out of start gates)
         if (curNode == null)
@@ -104,8 +106,15 @@ public class AI : Driver {
             {
                 if (combatTarget.moveTarget != null && combatTarget.moveTarget != goal)
                 {
-                    goal = combatTarget.moveTarget;
-                    goalPath = p.GetPathToTarget(curNode, goal);
+                    if ((float)tank.health / (float)tank.maxHealth <= 0.5f && (float)combatTarget.health / (float)combatTarget.maxHealth > 0.5f)
+                    {
+                        combatTarget = null;
+                        FindHealth();
+                    }
+                    else
+                    {
+                        ChaseTarget();
+                    }
                 }
             }
             
@@ -127,20 +136,13 @@ public class AI : Driver {
             //TODO: Currently just chasing closest tank, implement real logic here
             else
             {
-                goal = p.GetNearest(curNode, PathNode.TouchingObjects.Tanks);
-
-                if (goal != null)
+                if ((float)tank.health / (float)tank.maxHealth <= 0.5f)
                 {
-                    if (goal.tanksOnNode.Count > 0)
-                    {
-                        //Selecting combat target as first tank listed on node, may want to move to lowest health or highest points in future
-                        combatTarget = goal.tanksOnNode[0];
-
-                        //Once combat target is selected, it could be chased by setting goal to combatTarget.moveTarget continuously
-                        //We may need some sort of "re-calculate path everytime it changes" type of logic
-                    }
-
-                    goalPath = p.GetPathToTarget(curNode, goal);
+                    FindHealth();
+                }
+                else
+                {
+                    FindEnemey();
                 }
             }
         }
@@ -199,6 +201,20 @@ public class AI : Driver {
     {
         if (combatTarget != null)
         {
+            if (combatTarget.safe)
+            {
+                combatTarget = null;
+                goal = null;
+                goalPath = null;
+                return;
+            }
+
+            if (goalPath != null && goalPath.Count > 4)
+            {
+                //Don't shoot if still traveling to target and far away
+                return;
+            }
+
             tank.RotateTurretTowards(combatTarget.gameObject);
 
             fireTimer -= Time.deltaTime;
@@ -219,7 +235,7 @@ public class AI : Driver {
             {
                 SetMoveTarget((PathNode)goalPath.Pop());
 
-                if (goalPath.Count == 0)
+                if (goalPath.Count == ((combatTarget == null) ? 0 : distanceToAttack))
                 {
                     //Debug.Log("Moving Towards Final Goal: " + tank.gameObject.name);
                     goal = null;
@@ -227,6 +243,71 @@ public class AI : Driver {
                 }
             }
         }
+    }
+
+    private void FindEnemey()
+    {
+        goal = pathFinding.GetNearest(curNode, PathNode.TouchingObjects.Tanks);
+
+        if (goal != null)
+        {
+            if (goal.tanksOnNode.Count > 0)
+            {
+                //Selecting combat target as first tank listed on node, may want to move to lowest health or highest points in future
+                float lowestHealth = Mathf.Infinity;
+
+                for (int i = 0; i < goal.tanksOnNode.Count; ++i)
+                {
+                    if (goal.tanksOnNode[i].safe || goal.tanksOnNode[i] == tank)
+                    {
+                        continue;
+                    }
+
+                    if (goal.tanksOnNode[i].health < lowestHealth)
+                    {
+                        lowestHealth = goal.tanksOnNode[i].health;
+                        combatTarget = goal.tanksOnNode[i];
+                    }
+                }
+
+                //Once combat target is selected, it could be chased by setting goal to combatTarget.moveTarget continuously
+                //We may need some sort of "re-calculate path everytime it changes" type of logic
+            }
+
+            goalPath = pathFinding.GetPathToTarget(curNode, goal);
+        }
+    }
+
+    private void FindHealth()
+    {
+        goal = pathFinding.GetNearest(curNode, PathNode.TouchingObjects.Health);
+
+        if (goal != null)
+        {
+            goalPath = pathFinding.GetPathToTarget(curNode, goal);
+        }
+    }
+
+    private void ChaseTarget()
+    {
+        goal = combatTarget.moveTarget;
+        goalPath = pathFinding.GetPathToTarget(curNode, goal);
+    }
+
+    public void OnDeath()
+    {
+        if (moveTarget != null)
+        {
+            moveTarget.OnTankOff(tank);
+        }
+
+        curNode = null;
+        moveTarget = null;
+        combatTarget = null;
+        goal = null;
+        goalPath = null;
+
+        facingTarget = false;
     }
 
     private Vector3 ZeroOutY(Vector3 vec)

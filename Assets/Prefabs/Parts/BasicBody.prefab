@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 5
-  attribute: 10
+  attribute: 100
   description: A standard body
   cost: 0
 --- !u!136 &13692206
@@ -292,7 +292,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 154962}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 0.25
   m_Direction: 1
