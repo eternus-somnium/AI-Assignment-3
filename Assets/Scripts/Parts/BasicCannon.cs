@@ -20,7 +20,7 @@ public class BasicCannon : Weapon
 
 	public override void Fire()
 	{
-		Vector3 spawnPosition = transform.position;
+		Vector3 spawnPosition = transform.position + projectile[0].transform.position;
 		GameObject shot = (GameObject) Instantiate(projectile[0], spawnPosition, transform.rotation);
         shot.transform.SetParent(bullets.transform);
 		shot.GetComponent<Shot>().unit = unit;
