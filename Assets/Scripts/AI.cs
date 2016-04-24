@@ -13,7 +13,7 @@ public class AI : MonoBehaviour {
 
     //moveTarget is the next target in the path to move towards the goal
     public PathNode moveTarget; 
-    GameObject combatTarget;
+    public Tank combatTarget;
 
     public PathNode curNode;
 
@@ -56,11 +56,11 @@ public class AI : MonoBehaviour {
         //Tank no longer on current node (used for pathfinding tanks/items)
         if (curNode != null)
         {
-            curNode.OnTankOff();
+            curNode.OnTankOff(tank);
         }
 
         //Set a tank on the node, doing as soon as the target is set giving the AI a pseudo sense of knowing the direction of enemies
-        target.OnTankOn();
+        target.OnTankOn(tank);
 
         moveTarget = target;
         facingTarget = false;
@@ -70,7 +70,7 @@ public class AI : MonoBehaviour {
     private void MakeDecisions()
     {
         //Temporary variable, just putting this here to show that we can swap state from random roaming to chasing other tanks
-        bool aggresive = false;
+        bool aggresive = true;
 
         //If no current node and no move target, move to nearest node (handles getting tanks out of start gates)
         if (curNode == null)
@@ -82,6 +82,8 @@ public class AI : MonoBehaviour {
 
             return;
         }
+
+
 
         //TODO: Create real goal state machine for tanks (ie. attack, pick up health, move to corner, etc)
         if (goal == null && moveTarget == null)
@@ -99,6 +101,15 @@ public class AI : MonoBehaviour {
 
                 if (goal != null)
                 {
+                    if (goal.tanksOnNode.Count > 0)
+                    {
+                        //Selecting combat target as first tank listed on node, may want to move to lowest health or highest points in future
+                        combatTarget = goal.tanksOnNode[0];
+
+                        //Once combat target is selected, it could be chased by setting goal to combatTarget.GetComponent<AI>().moveTarget continuously
+                        //We may need some sort of "re-calculate path everytime it changes" type of logic
+                    }
+
                     goalPath = pathFinding.GetPathToTarget(curNode, goal);
                 }
             }

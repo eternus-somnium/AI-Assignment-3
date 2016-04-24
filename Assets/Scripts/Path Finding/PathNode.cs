@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class PathNode : MonoBehaviour {
 
@@ -16,6 +17,8 @@ public class PathNode : MonoBehaviour {
     public int dijkstraIndex;
 
     int tanks;
+
+    public List<Tank> tanksOnNode = new List<Tank>();
 
     bool hasTank, hasItem, hasHealth, hasBuff;
 
@@ -54,15 +57,20 @@ public class PathNode : MonoBehaviour {
         }
     }
 
-    public void OnTankOn()
+    public void OnTankOn(Tank tank)
     {
         tanks++;
+
+        tanksOnNode.Add(tank);
+
         hasTank = true;
     }
 
-    public void OnTankOff()
+    public void OnTankOff(Tank tank)
     {
         tanks--;
+
+        tanksOnNode.Remove(tank);
 
         if (tanks <= 0)
         {
