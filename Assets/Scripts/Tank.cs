@@ -172,6 +172,7 @@ public class Tank : Entity
 	public void EndRound()
 	{
 		GetComponent<Rigidbody>().useGravity = false;
+		transform.rotation = Quaternion.identity;
 		active = false;
 		Destroy(body);
 		Destroy(track);
