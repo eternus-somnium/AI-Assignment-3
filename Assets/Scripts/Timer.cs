@@ -10,6 +10,8 @@ public class Timer : MonoBehaviour
 
     public float buffRespawnRate = 30f;
     public float buffRespawnTimer;
+
+    public bool buffRespawnTimerActive = false;
 	// Use this for initialization
 	void Start () 
 	{
@@ -32,11 +34,11 @@ public class Timer : MonoBehaviour
 			g.TimerEnd();
 		}
 
-        if (buffRespawnTimer >= 0f)
+        if (buffRespawnTimerActive && buffRespawnTimer >= 0f)
         {
             buffRespawnTimer -= deltaTime;
         }
-        else
+        else if (buffRespawnTimerActive)
         {
             s.SpawnItems();
             buffRespawnTimer = buffRespawnRate;

@@ -87,10 +87,13 @@ public class GameManager : MonoBehaviour
         	s.SpawnItems();
 
 		t.StartTimer(roundTime*60);
+        t.buffRespawnTimerActive = true;
 	}
 
 	void EndRound()
 	{
+        t.buffRespawnTimerActive = false;
+
 		foreach(GameObject u in units)
 			u.GetComponent<Tank>().EndRound();
 		LoadLevel(2);
