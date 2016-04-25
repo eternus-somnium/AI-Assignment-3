@@ -11,7 +11,7 @@ public class Shot : MonoBehaviour
 		baseSpeed;
 	public GameObject unit;
 	
-	public void ShotStart()
+	public void Start()
 	{
 	}
 
