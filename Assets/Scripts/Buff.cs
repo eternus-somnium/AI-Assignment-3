@@ -6,6 +6,7 @@ public class Buff : MonoBehaviour {
     public bool hp, ammo;
 
     private int hpRestore = 50;
+    private int ammoRestore = 10;
 
     PathNode node;
 
@@ -13,7 +14,14 @@ public class Buff : MonoBehaviour {
     {
         node = GameObject.Find("ArenaAI").GetComponent<PathFinding>().GetNearestNode(gameObject);
 
-        node.OnHealthStateChanged(true);
+        if (hp)
+        {
+            node.OnHealthStateChanged(true);
+        }
+        else if (ammo)
+        {
+            node.OnAmmoStateChanged(true);
+        }
     }
 
     void OnCollisionEnter(Collision col)
@@ -22,7 +30,7 @@ public class Buff : MonoBehaviour {
 
         if (tank == null)
         {
-            Debug.Log("Not tank touched buff somehow");
+            //Debug.Log("Not tank touched buff somehow");
             return;
         }
 
@@ -36,13 +44,24 @@ public class Buff : MonoBehaviour {
             {
                 tank.health = tank.maxHealth;
             }
+
+            node.OnHealthStateChanged(false);
         }
         else if (ammo)
         {
+            if (tank.ammo + ammoRestore <= tank.maxAmmo)
+            {
+                tank.ammo += ammoRestore;
+            }
+            else
+            {
+                tank.ammo = tank.maxAmmo;
+            }
 
+            node.OnAmmoStateChanged(false);
         }
 
-        node.OnHealthStateChanged(false);
+      
         Destroy(gameObject);
     }
 }

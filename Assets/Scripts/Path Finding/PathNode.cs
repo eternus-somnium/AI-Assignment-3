@@ -7,7 +7,7 @@ public class PathNode : MonoBehaviour {
     public GameObject up = null, down = null, left = null, right = null;
     public PathNode[] neighbors;
 
-    public enum TouchingObjects { Tanks, HasItem, Health, Buffs };
+    public enum TouchingObjects { Tanks, HasItem, Health, Buffs, Ammo };
 
     public PathNode cameFrom, dijkstraCameFrom;
     public float g, h, f;
@@ -20,7 +20,7 @@ public class PathNode : MonoBehaviour {
 
     public List<Tank> tanksOnNode = new List<Tank>();
 
-    bool hasTank, hasItem, hasHealth, hasBuff;
+    bool hasTank, hasItem, hasHealth, hasBuff, hasAmmo;
 
     private AStar astar;
 
@@ -86,6 +86,11 @@ public class PathNode : MonoBehaviour {
     public void OnBuffStateChanged(bool state)
     {
         hasBuff = state;
+    }
+
+    public void OnAmmoStateChanged(bool state)
+    {
+        hasAmmo = state;
     }
 
     public bool HasType(TouchingObjects type)

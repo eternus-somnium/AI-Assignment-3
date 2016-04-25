@@ -76,15 +76,23 @@ public class Spawner : MonoBehaviour
     public void SpawnItems()
     {
         HPUpPrefab = (GameObject)Resources.Load("Prefabs/HPUp");
+        AmmoUpPrefab = (GameObject)Resources.Load("Prefabs/Ammo");
 
-        int numHPToSpawn = 5;
-        int numAmmoToSpawn = 5;
+        int numHPToSpawn = 4;
+        int numAmmoToSpawn = 4;
 
         for (int i = 0; i < numHPToSpawn; ++i)
         {
             GameObject hpInstance = Instantiate(HPUpPrefab);
 
             hpInstance.transform.position = new Vector3(Random.Range(0, 10) * 10, 2f, Random.Range(0, 10) * 10);
+        }
+
+        for (int i = 0; i < numAmmoToSpawn; ++i)
+        {
+            GameObject ammoInstance = Instantiate(AmmoUpPrefab);
+
+            ammoInstance.transform.position = new Vector3(Random.Range(0, 10) * 10, 2f, Random.Range(0, 10) * 10);
         }
     }
 }
