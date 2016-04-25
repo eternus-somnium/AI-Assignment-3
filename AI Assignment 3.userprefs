@@ -1,18 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Tank.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menus\ResultMenuControls.cs">
     <Files>
-      <File FileName="Assets\Scripts\Menus\MainMenu.cs" Line="15" Column="27" />
-      <File FileName="Assets\Scripts\Menus\ShopMenuControls.cs" Line="227" Column="84" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="101" Column="4" />
-      <File FileName="Assets\Scripts\Menus\ButtonListGenerator.cs" Line="21" Column="72" />
+      <File FileName="Assets\Scripts\Parts\Weapon.cs" Line="21" Column="36" />
+      <File FileName="Assets\Scripts\Menus\MainMenu.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menus\ShopMenuControls.cs" Line="105" Column="10" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menus\ButtonListGenerator.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\User.cs" Line="36" Column="55" />
-      <File FileName="Assets\Scripts\Tank.cs" Line="175" Column="44" />
-      <File FileName="Assets\Scripts\AI.cs" Line="330" Column="1" />
-      <File FileName="Assets\Scripts\Menus\Interface.cs" Line="35" Column="24" />
-      <File FileName="Assets\Scripts\Driver.cs" Line="18" Column="75" />
-      <File FileName="Assets\Scripts\Menus\ResultMenuControls.cs" Line="37" Column="42" />
-      <File FileName="Assets\Scripts\Shot.cs" Line="25" Column="1" />
+      <File FileName="Assets\Scripts\Tank.cs" Line="166" Column="28" />
+      <File FileName="Assets\Scripts\AI.cs" Line="354" Column="59" />
+      <File FileName="Assets\Scripts\Menus\Interface.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Driver.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menus\ResultMenuControls.cs" Line="23" Column="46" />
+      <File FileName="Assets\Scripts\Shot.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Parts\BasicCannon.cs" Line="23" Column="33" />
+      <File FileName="Assets\Scripts\Path Finding\Dijkstras.cs" Line="19" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -24,6 +27,7 @@
       <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Menus\ShopMenuControls.cs" line="138" column="1" />
       <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Menus\ShopMenuControls.cs" line="156" column="62" />
       <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Menus\ShopMenuControls.cs" line="221" column="1" />
+      <Breakpoint file="C:\Users\Clive\Documents\GitHub\AI Assignment 3\Assets\Scripts\Tank.cs" line="166" column="16" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
