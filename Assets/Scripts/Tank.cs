@@ -75,7 +75,7 @@ public class Tank : Entity
 	//Sets panel direction relative to player
 	void FixedUpdate()
 	{
-		if(ai != null && active && panel != null)
+		if(gameObject != g.units[0] && active && panel != null)
 		{
 			Vector3 v = Vector3.Normalize(transform.position-g.units[0].transform.position);
 			if(Vector3.Dot(v, Vector3.right) < 0)
@@ -160,9 +160,11 @@ public class Tank : Entity
 		maxAmmo = 20;
 		speed = track.GetComponent<Part>().attribute / weight;
 
-		//Update Arena bounty board
+		//Create Arena bounty board entry
 		panel = GameObject.Find("LeftPanel").GetComponent<ArenaBoardLeft>().AddUnitPanel();
 		panel.GetComponentsInChildren<Image>()[1].color = color;
+		if(GetComponent<User>() != null)
+			panel.transform.GetChild(2).gameObject.SetActive(false);
 		setBountyBoardValue();
 
 		//Refresh drivers

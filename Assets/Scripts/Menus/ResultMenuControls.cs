@@ -20,7 +20,7 @@ public class ResultMenuControls : Interface
 		//Sort units by bounty
 		sortedUnits = new List<GameObject>();
 		sortedUnits.AddRange(g.units);
-		sortedUnits = sortedUnits.OrderBy(x=>x.GetComponent<Tank>().bounty).ToList();
+		sortedUnits = sortedUnits.OrderByDescending(x=>x.GetComponent<Tank>().bounty).ToList();
 
 		//Display sorted list
 

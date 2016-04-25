@@ -321,12 +321,42 @@ public class AI : Driver {
 
 	public List<int> ChoosePart(List<GameObject> availableParts)
 	{
-		int i = 0;
+		int 
+			i = 0,
+			remainingFunds = tank.funds;
 		List<int> partNumbers = new List<int>();
-		partNumbers.Add(0);
 
 		do
 		{
+			GameObject shopPart = gameManager.parts[int.Parse(availableParts[i].name)];
+			int shopPartCost = shopPart.GetComponent<Part>().cost;
+			GameObject currentPart = null;
+
+			switch (shopPart.tag)
+			{
+			case "Body":
+				currentPart = tank.bodySchematic;
+				break;
+			case "Track":
+				currentPart = tank.trackSchematic;
+				break;
+			case "MainWeapon":
+				currentPart = tank.mainWeaponSchematic;
+				break;
+			case "SecondaryWeapon":
+				currentPart = tank.secondaryWeaponSchematic;
+				break;
+			case "Accessory":
+				currentPart = tank.accessorySchematic;
+				break;
+			}
+
+			if(shopPart.name != currentPart.name && shopPartCost <= remainingFunds)
+			{
+				remainingFunds-=shopPartCost;
+				partNumbers.Add(i);
+			}
+				
 			i++;
 		}
 		while(partNumbers.Count == 0 && i<availableParts.Count);
