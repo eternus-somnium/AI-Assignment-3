@@ -73,11 +73,14 @@ MonoBehaviour:
   active: 0
   position: {x: 0, y: 0, z: 0}
   hangerPosition: {x: 0, y: 0, z: 0}
+  hangerRotation: {x: 0, y: 0, z: 0, w: 0}
   panel: {fileID: 0}
   color: {r: 0, g: 0, b: 0, a: 0}
   weight: 0
   speed: 0
   heading: 0
+  ammo: 0
+  maxAmmo: 10
   bounty: 1
   funds: 0
   bodySchematic: {fileID: 128128, guid: fe11273ffdacb9244bdea0f0f88d6099, type: 2}
@@ -85,6 +88,8 @@ MonoBehaviour:
   mainWeaponSchematic: {fileID: 123304, guid: 37ec51bc026d6974babf5b0ea4bbe778, type: 2}
   secondaryWeaponSchematic: {fileID: 0}
   accessorySchematic: {fileID: 0}
+  moveTarget: {fileID: 0}
+  safe: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

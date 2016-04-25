@@ -14,7 +14,7 @@ public class User : Driver
 	// Update is called once per frame
 	void Update () 
 	{
-		if(t.active)
+		if(tank.active)
 		{
 			MoveController();
 			TurretController();
@@ -27,13 +27,13 @@ public class User : Driver
         {
             GameObject[] tanks = GameObject.FindGameObjectsWithTag("Tank");
 
-            foreach (GameObject tank in tanks)
+            foreach (GameObject t in tanks)
             {
                 AI ai = tank.GetComponent<AI>();
 
                 if (ai != null)
                 {
-                    ai.combatTarget = t;
+					ai.combatTarget = gameObject.GetComponent<Tank>();
                 }
             }
         }
@@ -43,21 +43,21 @@ public class User : Driver
 	{	
 		float moveDirection = Input.GetAxis("Vertical");
 		float turnDirection = Input.GetAxis("Horizontal");
-		t.Move(moveDirection, turnDirection);
+		tank.Move(moveDirection, turnDirection);
 	}
 
 	void TurretController()
 	{
 		float turretRotation = Input.GetAxis("Mouse X")*10;
-		t.RotateTurret(turretRotation);
+		tank.RotateTurret(turretRotation);
 	}
 
 	void WeaponController()
 	{
 		if(Input.GetButtonDown("Fire1"))
-			t.FireMain();
+			tank.FireMain();
 		if(Input.GetButtonDown("Fire2"))
-			t.FireSecondary();
+			tank.FireSecondary();
 	}
 
     //Sets move target as nearest node every second so that AI can track player
@@ -65,14 +65,14 @@ public class User : Driver
     {
 		if(setMoveTargetTimer > 2)
 		{
-	        if (t.moveTarget != null)
+	        if (tank.moveTarget != null)
 	        {
-	            t.moveTarget.OnTankOff(t);
+	            tank.moveTarget.OnTankOff(tank);
 	        }
 
-	        t.moveTarget = pathFinding.GetNearestNode(gameObject);
+	        tank.moveTarget = pathFinding.GetNearestNode(gameObject);
 
-	        t.moveTarget.OnTankOn(t);
+	        tank.moveTarget.OnTankOn(tank);
 			setMoveTargetTimer = 0;
 		}
 		else

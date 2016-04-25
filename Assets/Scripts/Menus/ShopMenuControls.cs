@@ -8,8 +8,12 @@ using System.Linq;
 
 public class ShopMenuControls : Interface 
 {
-	List<GameObject> sortedUnits;
+	public List<GameObject> 
+		sortedUnits,
+		availableParts;
 	public GameObject
+		blockingPanel,
+		partsContent,
 		selectedPartButton,
 		selectedPart,
 		currentPart,
@@ -36,10 +40,14 @@ public class ShopMenuControls : Interface
 	{
         InterfaceStart();
 
+		blockingPanel = GameObject.Find("BlockingPanel");
+		partsContent = GameObject.Find("PartsContent");
 		purchaseButton = GameObject.Find("PurchaseButton");
 		passButton = GameObject.Find("PassButton");
 
 		LocateTextObjects();
+
+		availableParts = partsContent.GetComponent<ButtonListGenerator>().populateButtonList();
 
 		//Sort units by bounty
 		sortedUnits = new List<GameObject>();
@@ -47,7 +55,7 @@ public class ShopMenuControls : Interface
 		sortedUnits = sortedUnits.OrderBy(x=>x.GetComponent<Tank>().bounty).ToList();
 
 		PopulateCurrentUnitData();
-
+		ActivatePartSelection();
 
 	}
 
@@ -148,15 +156,12 @@ public class ShopMenuControls : Interface
 		purchaseButton.GetComponent<Button>().interactable = false;
 		currentUnit++;
 		if(currentUnit == sortedUnits.Count)
-		{
-			if(g.round == 3)
-				g.LoadLevel(3);
-			else g.LoadLevel(1);
-		}
+			g.LoadLevel(1);
 		else
 		{
 			PopulateCurrentUnitData();
 			PopulateDisplayData(true);
+			ActivatePartSelection();
 		}
 	}
 		
@@ -199,6 +204,29 @@ public class ShopMenuControls : Interface
 			selectedPartAttribute.text = selectedPart.GetComponent<Part>().attribute.ToString();
 
 			selectedPartCost.text = "$ " + selectedPart.GetComponent<Part>().cost.ToString();
+		}
+	}
+
+	void ActivatePartSelection()
+	{
+		AI i;
+		if((i = sortedUnits[currentUnit].GetComponent<AI>()) == null)
+			blockingPanel.SetActive(false);
+		else
+		{
+			blockingPanel.SetActive(false);
+			List<int> chosenParts = i.ChoosePart(availableParts);
+			foreach(int part in chosenParts)
+			{
+				EventSystem.current.SetSelectedGameObject(availableParts[part]);
+
+				SelectPart();
+				BuyPart();
+			}
+
+			availableParts.RemoveAll(x=>x.GetComponent<Button>().IsInteractable() == false);
+
+			Pass();
 		}
 	}
 

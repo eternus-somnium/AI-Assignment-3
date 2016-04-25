@@ -15,8 +15,6 @@ public class AI : Driver {
 
     public PathNode curNode;
 
-    Tank tank;
-
     bool facingTarget = false;
 
     public int distanceToAttack = 2;
@@ -25,15 +23,15 @@ public class AI : Driver {
     float fireTimer;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
+		DriverStart();
         pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();
 
         if (pathFinding == null)
         {
             Debug.Log("Either ArenaAI does not exist in current context or it does not have script 'PathFinding' attached");
         }
-
-        tank = gameObject.GetComponent<Tank>();
 
         fireTimer = fireRate;
 	}
@@ -320,4 +318,19 @@ public class AI : Driver {
     {
         return Vector3.Distance(ZeroOutY(vec1), ZeroOutY(vec2));
     }
+
+	public List<int> ChoosePart(List<GameObject> availableParts)
+	{
+		int i = 0;
+		List<int> partNumbers = new List<int>();
+		partNumbers.Add(0);
+
+		do
+		{
+			i++;
+		}
+		while(partNumbers.Count == 0 && i<availableParts.Count);
+
+		return partNumbers;
+	}
 }

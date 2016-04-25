@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Entity : MonoBehaviour 
 {
-	public int 
+	public float 
 		health,
 		maxHealth;
 

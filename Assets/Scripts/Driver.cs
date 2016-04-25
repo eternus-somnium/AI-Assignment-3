@@ -4,7 +4,9 @@ using System.Collections;
 public class Driver : MonoBehaviour 
 {
 	public PathFinding pathFinding;
-	public Tank t;
+	public Tank tank;
+	public GameManager gameManager;
+
 	void Start()
 	{
 		DriverStart();
@@ -12,6 +14,7 @@ public class Driver : MonoBehaviour
 
 	public void DriverStart()
 	{
-		t = GetComponent<Tank>();
+		tank = GetComponent<Tank>();
+		gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 	}
 }

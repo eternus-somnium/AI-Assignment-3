@@ -15,7 +15,10 @@ public class Tank : Entity
 	public float 
 		weight,
 		speed,
-		heading = 0;
+		heading = 0,
+		relativeHeading,
+		ammo,
+		maxAmmo;
 
 	public int 
 		bounty = 1, 
@@ -33,6 +36,7 @@ public class Tank : Entity
         mainWeapon,
         secondaryWeapon,
         accessory;
+	GameManager g;
 	Spawner s;
 
     public PathNode moveTarget = null;
@@ -50,7 +54,8 @@ public class Tank : Entity
 
 	public void Start()
 	{
-		s=GameObject.Find("GameManager").GetComponent<Spawner>();
+		g = GameObject.Find("GameManager").GetComponent<GameManager>();
+		s = GameObject.Find("GameManager").GetComponent<Spawner>();
 
         ai = gameObject.GetComponent<AI>();
 
@@ -61,9 +66,26 @@ public class Tank : Entity
 	public void Update () 
 	{
 		if(active)
-		EntityUpdate();
-		heading = Mathf.RoundToInt(gameObject.transform.rotation.eulerAngles.y);
-		position = gameObject.transform.position;
+		{
+			EntityUpdate();
+			heading = Mathf.RoundToInt(gameObject.transform.rotation.eulerAngles.y);
+			position = gameObject.transform.position;
+		}
+	}
+	//Sets panel direction relative to player
+	void FixedUpdate()
+	{
+		if(ai != null && active && panel != null)
+		{
+			Vector3 v = Vector3.Normalize(transform.position-g.units[0].transform.position);
+			if(Vector3.Dot(v, Vector3.right) < 0)
+				relativeHeading = Vector3.Angle(Vector3.forward, v);
+			else
+				relativeHeading = 360-Vector3.Angle(Vector3.forward, v);
+			
+			panel.transform.GetChild(2).GetComponent<RectTransform>().rotation =
+				Quaternion.Euler(new Vector3(0,0, relativeHeading + 180));
+		}
 	}
 
 	public void FireMain()
@@ -105,6 +127,7 @@ public class Tank : Entity
 		{
 			body = (GameObject) Instantiate(bodySchematic, transform.position + bodySchematic.transform.position, Quaternion.identity);
 			body.transform.SetParent(transform);
+			body.GetComponent<Renderer>().material.color = color;
 			weight += body.GetComponent<Part>().weight;
 		}
 		if(trackSchematic != null)
@@ -134,11 +157,13 @@ public class Tank : Entity
 
 		//Set stats
 		maxHealth = body.GetComponent<Part>().attribute;
-
+		maxAmmo = 10;
 		speed = track.GetComponent<Part>().attribute / weight;
 
-		panel = GameObject.Find("LeftPanel").GetComponent<LeftPanel>().AddUnitPanel();
+		//Update Arena bounty board
+		panel = GameObject.Find("LeftPanel").GetComponent<ArenaBoardLeft>().AddUnitPanel();
 		panel.GetComponentsInChildren<Image>()[1].color = color;
+		setBountyBoardValue();
 
 		//Refresh drivers
 		GetComponent<Driver>().pathFinding = GameObject.Find("ArenaAI").GetComponent<PathFinding>();

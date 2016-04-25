@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class LeftPanel : MonoBehaviour 
+public class ArenaBoardLeft : MonoBehaviour 
 {
 	int offset = 0;
-	public GameObject prototypePanel;
-
-	void Start()
-	{
-	}
+	public GameObject arenaUnitPanel;
 
 	public GameObject AddUnitPanel()
 	{
 		GameObject newPanel = (GameObject)Instantiate(
-			prototypePanel,
+			arenaUnitPanel,
 			transform.position + new Vector3(0,88+offset,0),
 			Quaternion.identity);
 

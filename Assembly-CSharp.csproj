@@ -54,9 +54,10 @@
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\HangerDoor.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
+     <Compile Include="Assets\Scripts\Menus\ArenaBoardLeft.cs" />
+     <Compile Include="Assets\Scripts\Menus\ArenaBoardRight.cs" />
      <Compile Include="Assets\Scripts\Menus\ButtonListGenerator.cs" />
      <Compile Include="Assets\Scripts\Menus\Interface.cs" />
-     <Compile Include="Assets\Scripts\Menus\LeftPanel.cs" />
      <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Menus\ResultMenuControls.cs" />
      <Compile Include="Assets\Scripts\Menus\ShopMenuControls.cs" />

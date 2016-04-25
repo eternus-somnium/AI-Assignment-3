@@ -44,24 +44,6 @@ public class Interface : MonoBehaviour
 		}
 	}
 
-	//Sets the colors of grouped buttons
-	public void GroupedButtonSwitch()
-	{
-		GameObject button = EventSystem.current.currentSelectedGameObject;
-		GameObject panel = button.transform.parent.gameObject;
-
-		if(button.GetComponent<Image>().color == buttonOff)
-		{
-			//Sets each button to button off color
-			foreach(Button b in panel.GetComponentsInChildren<Button>())
-			{
-				SwitchButtonColor(b.gameObject, false);
-			}
-
-			SwitchButtonColor(button,true);
-		}
-	}
-
 	public void IndividualButtonSwitch()
 	{
 		GameObject button = EventSystem.current.currentSelectedGameObject;
@@ -81,31 +63,6 @@ public class Interface : MonoBehaviour
 			i.color = buttonOff;
 		}
 	}
-
-	//Sets the colors of grouped buttons
-	public void TabSwitch(GameObject activatedPanel)
-	{
-		GameObject tab = EventSystem.current.currentSelectedGameObject;
-		GameObject tabParent = tab.transform.parent.gameObject;
-
-		if(tab.GetComponent<Image>().color == buttonOff)
-		{
-			//Sets each button to button off color
-			foreach(Button b in tabParent.GetComponentsInChildren<Button>())
-			{
-				SwitchButtonColor(b.gameObject, false);
-			}
-			SwitchButtonColor(tab,true);
-
-			//Switch each tab to inactive
-			foreach(CanvasGroup c in activatedPanel.transform.parent.gameObject.GetComponentsInChildren<CanvasGroup>())
-			{
-				c.gameObject.SetActive(false);
-			}
-			activatedPanel.SetActive(true);
-		}
-	}
-
 
 	public void viewPanel(GameObject panel)
 	{

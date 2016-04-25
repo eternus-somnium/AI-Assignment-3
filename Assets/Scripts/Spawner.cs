@@ -7,7 +7,6 @@ public class Spawner : MonoBehaviour
 	public int units;
 	public GameObject tankPrefab;
 	public GameObject[] hangers;
-	public LeftPanel leftPanel;
 
     public GameObject HPUpPrefab;
     public GameObject AmmoUpPrefab;
@@ -15,8 +14,8 @@ public class Spawner : MonoBehaviour
 	public void FindHangers()
 	{
 		hangers = GameObject.FindGameObjectsWithTag("Hanger");
-		leftPanel = GameObject.Find("LeftPanel").GetComponent<LeftPanel>();
 	}
+
 	public GameObject[] SetupTanks()
 	{
 		int i;
@@ -41,17 +40,18 @@ public class Spawner : MonoBehaviour
 		}
 		return tanks;
 	}
+
+	//Sets the tank's health and ammo to max and places it in its hanger
 	public void SpawnTank(GameObject unit, bool rebuild)
 	{
 		Tank tankScript = unit.GetComponent<Tank>();
 		tankScript.health = tankScript.maxHealth;
+		tankScript.ammo = tankScript.maxAmmo;
         tankScript.safe = true;
 		unit.transform.position = tankScript.hangerPosition;
 		if(rebuild)
 			tankScript.startRound();
 		unit.transform.rotation = tankScript.hangerRotation;
-		tankScript.setBountyBoardValue();
-
 	}
 
 	public Color GenerateColor(float i)

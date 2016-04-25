@@ -96,6 +96,10 @@ public class GameManager : MonoBehaviour
 
 		foreach(GameObject u in units)
 			u.GetComponent<Tank>().EndRound();
-		LoadLevel(2);
+
+		if(round == 3)
+			LoadLevel(3);
+		else 
+			LoadLevel(2);
 	}
 }
