@@ -142,8 +142,10 @@ MonoBehaviour:
   description: A standard cannon
   cost: 0
   unit: {fileID: 0}
+  tank: {fileID: 0}
   projectile:
   - {fileID: 136538, guid: 644fd856b862397429e040004f5913f1, type: 2}
+  ammoConsumed: 1
   projectileSpeed:
   - 20
   projectileDamage:

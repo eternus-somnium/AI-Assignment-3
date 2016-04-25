@@ -157,7 +157,7 @@ public class Tank : Entity
 
 		//Set stats
 		maxHealth = body.GetComponent<Part>().attribute;
-		maxAmmo = 10;
+		maxAmmo = 20;
 		speed = track.GetComponent<Part>().attribute / weight;
 
 		//Update Arena bounty board

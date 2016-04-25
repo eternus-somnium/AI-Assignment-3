@@ -5,7 +5,9 @@ public class Weapon : Part
 {
 	int i;
 	public GameObject unit;
+	public Tank tank;
 	public GameObject[] projectile;
+	public int ammoConsumed;
 	public float[] 
 		projectileSpeed,
 		projectileDamage;
@@ -16,6 +18,7 @@ public class Weapon : Part
 	public void WeaponStart () 
 	{
 		unit = transform.root.gameObject;
+		tank = unit.GetComponent<Tank>();
 		for(i=0;i<projectile.Length;i++)
 		{
 			Shot s = projectile[i].GetComponent<Shot>();
